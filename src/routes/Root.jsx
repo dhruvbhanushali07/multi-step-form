@@ -4,8 +4,8 @@ import { Outlet } from "react-router";
 
 export default function Root() {
   return (
-    <div className="flex flex-wrap justify-center content-center font-ubuntu bg-neutral-magnolia">
-      <div className="main w-screen h-screen ">
+    <div className="flex h-screen w-screen flex-wrap content-center justify-center bg-neutral-magnolia font-ubuntu">
+      <div className="main flex h-full w-full flex-col bg-neutral-white lg:h-4/5 lg:w-4/5 xl:w-3/5 lg:flex-row lg:p-4 rounded-2xl">
         <Navbar />
         <Outlet />
       </div>
