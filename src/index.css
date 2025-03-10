@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+@import "tailwindcss";
+@theme{
+
+    /* Primary colors */
+    --color-primary-marine-blue: hsl(213, 96%, 18%);
+    --color-primary-purplish-blue: hsl(243, 100%, 62%);
+    --color-primary-Pastel-blue: hsl(228, 100%, 84%);
+    --color-primary-Light-blue: hsl(206, 94%, 87%);
+    --color-primary-Strawberry red: hsl(354, 84%, 57%);
+    
+    /* Neutral Colors */
+    --color-neutral-cool-gray: hsl(231, 11%, 63%);
+    --color-neutral-light-gray: hsl(229, 24%, 87%);
+    --color-neutral-magnolia: hsl(217, 100%, 97%);
+    --color-neutral-alabaster: hsl(231, 100%, 99%);
+    --color-neutral-white: hsl(0, 0%, 100%);
+
+    /* Fonts */
+    --font-ubuntu:"Ubuntu";
+    
+
+
+}
