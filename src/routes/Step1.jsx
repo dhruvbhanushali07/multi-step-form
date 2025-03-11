@@ -4,7 +4,7 @@ import FooterNav from "../components/footerNav";
 export default function Step1() {
   return (
     <div className="relative h-4/5 w-full lg:h-full">
-      <div className="absolute top-[-8%] left-[50%] flex h-[78%] w-[92%] md:w-[600px] translate-x-[-50%] flex-col gap-4 lg:gap-8 rounded-lg bg-neutral-white p-8 lg:p-16 drop-shadow-xl lg:static lg:w-full lg:translate-x-0 lg:drop-shadow-none ">
+      <div className="absolute top-[-8%] left-[50%] flex h-[78%] w-[92%] md:w-[600px] translate-x-[-50%] flex-col gap-4 lg:gap-6 rounded-lg bg-neutral-white p-8 lg:p-16 drop-shadow-xl lg:static lg:w-full lg:translate-x-0 lg:drop-shadow-none ">
         <h1 className="text-2xl lg:text-4xl font-bold text-primary-marine-blue">
           Personal Info
         </h1>
@@ -12,7 +12,7 @@ export default function Step1() {
           Please provide your name, email address and phone number
         </h2>
         <div className="lg:text-xl">
-          <label htmlFor="name" >Name</label>
+          <label htmlFor="name" className="text-primary-marine-blue" >Name</label>
           <input
             id="name"
             name="username"
@@ -22,17 +22,17 @@ export default function Step1() {
           />
         </div>
         <div className="lg:text-xl">
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email" className="text-primary-marine-blue">Email Address</label>
           <input
             id="email"
             name="email"
             className="w-full rounded-md border border-neutral-cool-gray p-2 font-medium"
             type="text"
-            placeholder="e.g. Dhruv Bhanushali"
+            placeholder="e.g. dhruvbhanushali@mail.com"
           />
         </div>
         <div className="lg:text-xl">
-          <label htmlFor="phoneNumber">Phone Number</label>
+          <label htmlFor="phoneNumber" className="text-primary-marine-blue ">Phone Number</label>
           <input
             id="phoneNumber"
             name="Phonenumber"

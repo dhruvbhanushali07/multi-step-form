@@ -46,6 +46,7 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
+
       <div className="flex flex-wrap gap-4">
         <NavLink
           to="/step3"
@@ -66,6 +67,7 @@ export default function Navbar() {
           </div>
         </Link>
       </div>
+      
       <div className="flex flex-wrap gap-4">
         <NavLink
           to="/step4"
