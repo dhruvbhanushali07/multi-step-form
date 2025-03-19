@@ -8,7 +8,6 @@ export default function Step1() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors,isSubmitSuccessful },
   } = useForm();
   
@@ -41,7 +40,7 @@ export default function Step1() {
               <label htmlFor="name" className="text-primary-marine-blue">
                 Name
               </label>
-              <span className="text-primary-Strawberry-red">
+              <span className="text-primary-Strawberry-red text-xs lg:text-sm">
                 {errors.username?.message}
               </span>
             </div>
@@ -58,7 +57,7 @@ export default function Step1() {
               <label htmlFor="email" className="text-primary-marine-blue">
                 Email Address
               </label>
-              <span className="text-primary-Strawberry-red">
+              <span className="text-primary-Strawberry-red text-xs lg:text-sm">
                 {errors.usermail?.message}
               </span>
             </div>
@@ -78,7 +77,7 @@ export default function Step1() {
               <label htmlFor="phoneNumber" className="text-primary-marine-blue">
                 Phone Number
               </label>
-              <span className="text-primary-Strawberry-red">
+              <span className="text-primary-Strawberry-red text-xs lg:text-sm">
                 {errors.userphonenumber?.message}
               </span>
             </div>

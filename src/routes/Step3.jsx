@@ -46,15 +46,15 @@ export default function Step3() {
                     />
                     </div>
                     <div className="place-content-start">
-                    <h1 className="text-xl font-medium text-wrap text-primary-marine-blue">
+                    <h1 className="lg:text-xl font-medium text-wrap text-primary-marine-blue">
                         {item.addon}
                     </h1>
-                    <h2 className="text-xl text-neutral-cool-gray">
+                    <h2 className="lg:text-xl text-neutral-cool-gray">
                         {item.desc}
                     </h2>
                     </div>
                     <div className="m-auto text-primary-purplish-blue">
-                    <p className="text-xl">{item.price}</p>
+                    <p className="lg:text-xl">{item.price}</p>
                     </div>
                 </label>
                 );

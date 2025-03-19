@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 
-export default function FooterNav({ previous, next, submitBtnRef,errors, flag }) {
+export default function FooterNav({ previous, next, submitBtnRef, flag }) {
     const navigate = useNavigate();
     
     useEffect(()=>{
         if(flag){
+            console.log("Go to next page");  
             navigate(next)
         }
     },[flag])

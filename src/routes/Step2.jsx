@@ -1,33 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import FooterNav from "../components/footerNav";
-
+import { useForm } from "react-hook-form";
+import {useDispatch, useSelector} from 'react-redux'
+import { updatePlan } from "../features/userPlanSlice";
 export default function Step2() {
-  const plans = [
+  const monthlyplans = [
     {
       plan: "Arcade",
-      icon: "./images/icon-arcade.svg",
+      paymentFreq: "Monthly",
+      price: 9,
     },
     {
       plan: "Advanced",
-      icon: "./images/icon-advanced.svg",
+      paymentFreq: "Monthly",
+      price: 12,
     },
     {
       plan: "Pro",
-      icon: "./images/icon-pro.svg",
+      paymentFreq: "Monthly",
+      price: 15,
     },
   ];
 
-  const [currentPlan, setcurrentPlan] = useState();
-  const monthlyPrice = ["$9/mo", "$12/mo", "$15/mo"];
-  const yearlyPrice = ["$90/yr", "$120/yr", "$150/yr"];
+  const yearlyplans = [
+    {
+      plan: "Arcade",
+      paymentFreq: "Yearly",
+      price: 90,
+    },
+    {
+      plan: "Advanced",
+      paymentFreq: "Yearly",
+      price: 120,
+    },
+    {
+      plan: "Pro",
+      paymentFreq: "Yearly",
+      price: 150,
+    },
+  ];
 
+  const planIcons = [
+    "./images/icon-arcade.svg",
+    "./images/icon-advanced.svg",
+    "./images/icon-pro.svg",
+  ];
+
+  const dispatch=useDispatch();
+  const cp=useSelector((state)=>state.userInfo.planDetails.planName);
+  
+  const [currentPlan, setcurrentPlan] = useState(cp);
   const [isOn, setIsOn] = useState(false);
+  const plans = !isOn ? monthlyplans : yearlyplans;
+  const submitButtonRef = useRef();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm();
+
+  const watchPlan=watch("userplan")
+  const onSubmit = (data) => {
+    data=data.userplan?.split(",")
+    let currentp={
+      planName:data?.[0],
+      planPrice:parseInt(data?.[1]),
+      paymentFreq:data?.[2]
+    }
+    console.log(currentp);
+    
+    dispatch(updatePlan(currentp))
+  };
 
   const toggleSwitch = () => {
     setIsOn(!isOn);
   };
 
-  const planpricing = !isOn ? monthlyPrice : yearlyPrice;
+  useEffect(()=>{
+    const subscription = watch((value) => 
+    {
+      console.log(value);
+      value=value.userplan?.split(",")
+      setcurrentPlan(value[0])
+      console.log(value,value[0]);
+      
+    });
+    return () => subscription.unsubscribe();
+  },[watchPlan])
+
   return (
     <div className="relative h-4/5 w-full lg:h-full">
       <div className="absolute top-[-8%] left-[50%] flex h-auto w-[92%] translate-x-[-50%] flex-col gap-4 rounded-lg bg-neutral-white p-8 drop-shadow-xl md:w-[600px] lg:static lg:w-full lg:translate-x-0 lg:gap-6 lg:p-16 lg:drop-shadow-none">
@@ -37,35 +98,39 @@ export default function Step2() {
         <h2 className="text-neutral-cool-gray lg:text-xl">
           You have the option of monthly or yearly billing.
         </h2>
-        <div className="flex flex-col gap-2 lg:flex-row lg:justify-between">
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-2 lg:flex-row lg:justify-between"
+        >
           {plans.map((item, index) => {
-            const isChecked = item.plan === currentPlan;
+            
             return (
               <div
-                className={`rounded-lg border-2 p-4 hover:border-primary-purplish-blue lg:h-[15rem] lg:w-[30%] ${isChecked ? "border-primary-purplish-blue bg-primary-purplish-blue/5" : "border-neutral-light-gray bg-neutral-white"}`}
+                className={`rounded-lg border-2 hover:border-primary-purplish-blue lg:h-[15rem] lg:w-[30%] `}
                 key={index}
               >
                 <input
                   type="radio"
-                  className="hidden"
-                  name="plan"
+                  className="hidden peer"
+                  {...register("userplan")}
                   id={item.plan}
-                  value={item.plan}
-                  onChange={(e) => setcurrentPlan(e.target.value)}
+                  checked={currentPlan==item.plan?true:false}
+                  value={[item.plan,item.price,item.paymentFreq]}
                 />
                 <label
-                  className="flex h-full w-full flex-wrap content-center gap-4 lg:flex-col lg:content-start lg:justify-around"
+                  className="flex h-full w-full p-4 flex-wrap content-center gap-4 lg:flex-col lg:content-start lg:justify-around peer-checked:bg-primary-purplish-blue/10 peer-checked:border-primary-purplish-blue"
                   htmlFor={item.plan}
                 >
                   <div className="planicon">
-                    <img src={item.icon} alt="logo" />
+                    <img src={planIcons[index]} alt="logo" />
                   </div>
                   <div>
-                    <h1 className="text-xl font-medium text-primary-marine-blue">
+                    <h1 className="font-medium text-primary-marine-blue lg:text-xl">
                       {item.plan}
                     </h1>
-                    <h2 className="text-xl text-neutral-cool-gray">
-                      {planpricing[index]}
+                    <h2 className="text-neutral-cool-gray lg:text-xl">
+                      {`$ ${item.price}/ ${isOn?"yr":"mo"}`}
                     </h2>
                     <h2
                       className={`font-medium text-primary-marine-blue ${isOn ? "block" : "hidden"}`}
@@ -77,7 +142,12 @@ export default function Step2() {
               </div>
             );
           })}
-        </div>
+          <button
+            ref={submitButtonRef}
+            type="submit"
+            className="hidden"
+          ></button>
+        </form>
 
         <div className="flex w-full flex-wrap content-center justify-center gap-4 rounded-md bg-neutral-magnolia p-2">
           <h1
@@ -107,7 +177,12 @@ export default function Step2() {
         </div>
       </div>
       <div className="absolute bottom-0 h-[12%] w-full bg-neutral-white">
-        <FooterNav previous={"/"} next={"/step3"} />
+        <FooterNav
+          previous={"/"}
+          next={"/step3"}
+          submitBtnRef={submitButtonRef}
+          flag={isSubmitSuccessful}
+        />
       </div>
     </div>
   );
