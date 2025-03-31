@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import FooterNav from "/src/components/footerNav";
+import FooterNav from "/src/components/FooterNav";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAddOns } from "../features/userPlanSlice";
