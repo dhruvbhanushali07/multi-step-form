@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import FooterNav from "../components/footerNav";
+import FooterNav from "/src/components/footerNav";
 import { useSelector } from "react-redux";
 import { Link,useNavigate } from "react-router";
 

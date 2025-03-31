@@ -1,4 +1,4 @@
-import React,{useeff} from "react";
+import React,{useEffect} from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 export default function Step5() {
