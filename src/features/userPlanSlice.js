@@ -5,10 +5,12 @@ const initial={
         email:"",
         contact:"",
         planDetails:{
-            planName:"Arcade",
-            planPrice:9,
+            id:0,
+            plan:"Arcade",
+            price:9,
             paymentFreq:"Monthly"
-        }
+        },
+        addOns:[]
 }
 const userInfoSlice=createSlice({
     name:"userInfo",
@@ -18,8 +20,9 @@ const userInfoSlice=createSlice({
         updateEmail:(state,action)=>{state.email=action.payload},
         updateContact:(state,action)=>{state.contact=action.payload},
         updatePlan:(state,action)=>{state.planDetails=action.payload},
+        updateAddOns:(state,action)=>{state.addOns=action.payload}
     }
 })
 
-export const {updateName,updateEmail,updateContact,updatePlan}=userInfoSlice.actions
+export const {updateName,updateEmail,updateContact,updatePlan,updateAddOns}=userInfoSlice.actions
 export default userInfoSlice.reducer;

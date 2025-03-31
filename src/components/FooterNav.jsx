@@ -14,8 +14,12 @@ export default function FooterNav({ previous, next, submitBtnRef, flag }) {
         navigate(previous);
     }
     
-    function handleSubmit() {
+    function handleSubmit() {         
         submitBtnRef.current.click()
+    }
+
+    function confirmed(){
+        navigate(next)
     }
 
     
@@ -32,10 +36,10 @@ export default function FooterNav({ previous, next, submitBtnRef, flag }) {
         <button
             className="cursor-pointer rounded-md bg-primary-marine-blue p-3 font-medium text-neutral-white transition-all hover:bg-primary-purplish-blue"
             onClick={() => {
-            handleSubmit();
+                next=='/confirmed'?confirmed():handleSubmit()
             }}
         >
-            Next Step
+            {next=='/confirmed'?"Confirm":"Next Step"}
         </button>
         </div>
     );
