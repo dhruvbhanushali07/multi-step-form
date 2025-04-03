@@ -56,9 +56,9 @@ export default function Step2() {
   ];
 
   const dispatch = useDispatch();
-  const cp = useSelector((state) => state.userInfo.planDetails);
+  const currentStatePlan = useSelector((state) => state.userInfo.planDetails);
 
-  const [currentPlan, setcurrentPlan] = useState(cp.id);
+  const [currentPlan, setcurrentPlan] = useState(currentStatePlan.id);
   const [isOn, setIsOn] = useState(cp.paymentFreq == "Yearly" ? true : false);
   const plans = !isOn ? monthlyplans : yearlyplans;
   const submitButtonRef = useRef();

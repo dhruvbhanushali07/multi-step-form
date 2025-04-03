@@ -47,8 +47,6 @@ export default function Step3() {
     },
   ];
 
-  
-
   const submitButtonRef = useRef();
 
   const {
@@ -58,16 +56,18 @@ export default function Step3() {
     formState: { errors, isSubmitSuccessful },
   } = useForm();
 
-  const watchAddons = watch("addon0");
+  const watchAddons = watch();
   const dispatch = useDispatch();
-  const pf= useSelector((state)=>state.userInfo.planDetails.paymentFreq)=="Monthly"
-  
+  const paymentFreq =
+    useSelector((state) => state.userInfo.planDetails.paymentFreq) == "Monthly";
+
   const allAddons = useSelector((state) => state.userInfo.addOns);
   const selectedAddons = allAddons.map((item) => {
     return item.id;
   });
   const [mymyaddon, setmymyaddon] = useState(selectedAddons);
-  const addOns=pf?monthlyaddOns:yearlyaddOns
+  const addOns = paymentFreq ? monthlyaddOns : yearlyaddOns;
+
   function onsubmit(data) {
     let myAddons = [];
     const datavalues = Object.values(data);
@@ -82,15 +82,12 @@ export default function Step3() {
     dispatch(updateAddOns(myAddons));
   }
 
-  // type diff
   useEffect(() => {
-    const abc = watch((value) => {
+    const updateaddonselection = watch((value) => {
       setmymyaddon(Object.values(value));
     });
   }, [watchAddons]);
 
-  console.log(pf);
-  
   return (
     <div className="relative h-4/5 w-full lg:h-full">
       <div className="absolute top-[-8%] left-[50%] flex h-auto w-[92%] translate-x-[-50%] flex-col gap-4 rounded-lg bg-neutral-white p-8 drop-shadow-xl md:w-[600px] lg:static lg:w-full lg:translate-x-0 lg:gap-6 lg:p-10 lg:drop-shadow-none">
@@ -106,24 +103,23 @@ export default function Step3() {
           onSubmit={handleSubmit(onsubmit)}
         >
           {addOns.map((item, index) => {
-            const checked=mymyaddon.includes(`${item.id}`)
+            const checked = mymyaddon.includes(`${item.id}`);
             return (
               <label
                 key={index}
-                className={`grid grid-cols-[0.5fr_2.5fr_1fr] gap-2 rounded-md border p-4 ${checked?"border-primary-purplish-blue bg-primary-purplish-blue/10":"border-neutral-cool-gray"} lg:grid-cols-[0.5fr_2fr_1fr] xl:p-6`}
+                className={`grid grid-cols-[0.5fr_2.5fr_1fr] gap-2 rounded-md border p-4 ${checked ? "border-primary-purplish-blue bg-primary-purplish-blue/10" : "border-neutral-cool-gray"} lg:grid-cols-[0.5fr_2fr_1fr] xl:p-6`}
                 htmlFor={item.addon}
               >
-                
-                  <input
-                    {...register(`addon${index}`)}
-                    type="checkbox"
-                    className="m-auto size-5"
-                    id={item.addon}
-                    value={item.id}
-                    checked={checked}
-                  />
-                
-                <div className="place-content-start ">
+                <input
+                  {...register(`addon${index}`)}
+                  type="checkbox"
+                  className="m-auto size-5"
+                  id={item.addon}
+                  value={item.id}
+                  checked={checked}
+                />
+
+                <div className="place-content-start">
                   <h1 className="font-medium text-wrap text-primary-marine-blue lg:text-xl">
                     {item.addon}
                   </h1>
@@ -132,7 +128,7 @@ export default function Step3() {
                   </h2>
                 </div>
                 <div className="m-auto text-primary-purplish-blue">
-                  <p className="lg:text-xl">{`$ ${item.price}/${pf?"mo":"yr"}`}</p>
+                  <p className="lg:text-xl">{`$ ${item.price}/${paymentFreq ? "mo" : "yr"}`}</p>
                 </div>
               </label>
             );

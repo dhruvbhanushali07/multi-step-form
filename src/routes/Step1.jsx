@@ -1,41 +1,51 @@
-import React, { useEffect, useRef,useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FooterNav from "/src/components/FooterNav";
 import { useForm } from "react-hook-form";
-import {useDispatch,useSelector} from 'react-redux'
-import { updateContact, updateEmail, updateName } from "../features/userPlanSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateContact,
+  updateEmail,
+  updateName,
+} from "../features/userPlanSlice";
 
 export default function Step1() {
   const {
     register,
     watch,
     handleSubmit,
-    formState: { errors,isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful },
   } = useForm();
-  
-  const submitButtonRef=useRef()
-  const dispatch=useDispatch()
-  const [userName,setUsername]=useState(useSelector((state)=>state.userInfo.fullname)||"")  
-  const [useremail,setUseremail]=useState(useSelector((state)=>state.userInfo.email)||"")
-  const [usernum,setUsernum]=useState(useSelector((state)=>state.userInfo.contact)||"")
-  
-    const onSubmit = (data) => {
-      dispatch(updateName(data.username))
-      dispatch(updateEmail(data.usermail))
-      dispatch(updateContact(data.userphonenumber))
-    }
-    
+
+  const submitButtonRef = useRef();
+  const dispatch = useDispatch();
+  const [userName, setUsername] = useState(
+    useSelector((state) => state.userInfo.fullname) || "",
+  );
+  const [useremail, setUseremail] = useState(
+    useSelector((state) => state.userInfo.email) || "",
+  );
+  const [usernum, setUsernum] = useState(
+    useSelector((state) => state.userInfo.contact) || "",
+  );
+
+  const onSubmit = (data) => {
+    dispatch(updateName(data.username));
+    dispatch(updateEmail(data.usermail));
+    dispatch(updateContact(data.userphonenumber));
+  };
+
   const validateEmail = (email) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email) || "Invalid email address";
   };
-  const formData=watch()
-  useEffect(()=>{
-    const watcher=watch((value)=>{
-      setUsername(value.username)
-      setUseremail(value.usermail)
-      setUsernum(value.userphonenumber )
-    })
-  },[formData])
+  const formData = watch();
+  useEffect(() => {
+    const watcher = watch((value) => {
+      setUsername(value.username);
+      setUseremail(value.usermail);
+      setUsernum(value.userphonenumber);
+    });
+  }, [formData]);
 
   return (
     <div className="relative h-4/5 w-full lg:h-full">
@@ -52,19 +62,21 @@ export default function Step1() {
               <label htmlFor="name" className="text-primary-marine-blue">
                 Name
               </label>
-              <span className="text-primary-Strawberry-red text-xs lg:text-sm">
+              <span className="text-xs text-primary-Strawberry-red lg:text-sm">
                 {errors.username?.message}
               </span>
             </div>
             <input
               id="name"
-              {...register("username", { required: "This field is Required",
-                validate: (value) =>value.trim() !== '' || 'Name cannot be just spaces',
+              {...register("username", {
+                required: "This field is Required",
+                validate: (value) =>
+                  value.trim() !== "" || "Name cannot be just spaces",
                 pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: 'Name must contain only letters and spaces',
-              },
-  })}
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Name must contain only letters and spaces",
+                },
+              })}
               className={`w-full rounded-md border p-2 font-medium focus:outline-primary-marine-blue ${errors.username ? "border-primary-Strawberry-red" : "border-neutral-cool-gray"}`}
               type="text"
               value={userName}
@@ -76,7 +88,7 @@ export default function Step1() {
               <label htmlFor="email" className="text-primary-marine-blue">
                 Email Address
               </label>
-              <span className="text-primary-Strawberry-red text-xs lg:text-sm">
+              <span className="text-xs text-primary-Strawberry-red lg:text-sm">
                 {errors.usermail?.message}
               </span>
             </div>
@@ -97,7 +109,7 @@ export default function Step1() {
               <label htmlFor="phoneNumber" className="text-primary-marine-blue">
                 Phone Number
               </label>
-              <span className="text-primary-Strawberry-red text-xs lg:text-sm">
+              <span className="text-xs text-primary-Strawberry-red lg:text-sm">
                 {errors.userphonenumber?.message}
               </span>
             </div>
@@ -124,7 +136,12 @@ export default function Step1() {
         </form>
       </div>
       <div className="absolute bottom-0 h-[12%] w-full bg-neutral-white">
-        <FooterNav previous={""} next={"/step2"} submitBtnRef={submitButtonRef} flag={isSubmitSuccessful}/>
+        <FooterNav
+          previous={""}
+          next={"/step2"}
+          submitBtnRef={submitButtonRef}
+          flag={isSubmitSuccessful}
+        />
       </div>
     </div>
   );
