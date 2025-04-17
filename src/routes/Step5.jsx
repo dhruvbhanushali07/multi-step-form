@@ -11,7 +11,7 @@ export default function Step5() {
   },[])
   return (
     <div className="relative h-4/5 w-full lg:h-full">
-      <div className="absolute top-[-8%] left-[50%] flex justify-center flex-wrap content-center h-full max-h-[80%] w-[92%] translate-x-[-50%] flex-col gap-4 rounded-lg bg-neutral-white p-8 drop-shadow-xl md:w-[600px] lg:static lg:w-full lg:translate-x-0 lg:gap-6 lg:p-16 lg:drop-shadow-none">
+      <div className="flex translate-y-[-10%] lg:translate-y-0 mx-auto justify-center flex-wrap content-center h-full max-h-[80%] w-[92%]  flex-col gap-4 rounded-lg bg-neutral-white p-8 drop-shadow-xl md:w-[600px] lg:static lg:w-full lg:translate-x-0 lg:gap-6 lg:p-16 lg:drop-shadow-none">
         <img src="/images/icon-thank-you.svg" alt="confirmation-icon" />
         <h1 className="text-2xl font-bold text-primary-marine-blue text-center lg:text-4xl">
           Thank you!

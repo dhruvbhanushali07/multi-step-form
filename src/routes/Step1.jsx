@@ -48,8 +48,8 @@ export default function Step1() {
   }, [formData]);
 
   return (
-    <div className="relative h-4/5 w-full lg:h-full">
-      <div className="absolute top-[-8%] left-[50%] flex h-[78%] w-[92%] translate-x-[-50%] flex-col gap-4 rounded-lg bg-neutral-white p-8 drop-shadow-xl md:w-[600px] lg:static lg:w-full lg:translate-x-0 lg:gap-6 lg:p-16 lg:drop-shadow-none">
+    <div className="relative flex flex-col justify-between h-4/5 w-full lg:h-full">
+      <div className="content-box">
         <h1 className="text-2xl font-bold text-primary-marine-blue lg:text-4xl">
           Personal Info
         </h1>
@@ -135,7 +135,7 @@ export default function Step1() {
           <button type="submit" ref={submitButtonRef}></button>
         </form>
       </div>
-      <div className="absolute bottom-0 h-[12%] w-full bg-neutral-white">
+      <div className="mx-auto  h-[12%] w-[90%] bg-neutral-white">
         <FooterNav
           previous={""}
           next={"/step2"}

@@ -24,9 +24,9 @@ export default function FooterNav({ previous, next, submitBtnRef, flag }) {
 
     
     return (
-        <div className="m-auto flex h-full w-full flex-wrap content-center justify-between p-4 md:max-lg:w-[600px] lg:px-16">
+        <div className=" m-auto flex h-full w-full flex-wrap content-center justify-between  md:max-lg:w-[600px] ">
         <button
-            className={`rounded-md bg-transparent p-3 text-neutral-cool-gray ${previous ? "block" : "invisible"} cursor-pointer font-medium hover:bg-neutral-light-gray`}
+            className={`rounded-md transition-all bg-transparent p-3 text-neutral-cool-gray ${previous ? "block" : "invisible"} cursor-pointer font-medium hover:bg-neutral-light-gray`}
             onClick={() => {
             goBack();
             }}
